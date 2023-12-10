@@ -2,6 +2,7 @@ package com.example.mymusicshop;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -115,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Order order = new Order();
 
         order.userName = userNameEditText.getText().toString();
+        Log.d("price", ""+order.price);
+        order.price=price;
          Log.d( "userName", order.userName);
          order.goodsName = goodsName;
          Log.d( "goodsName", order.goodsName);
@@ -123,5 +126,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
          order.orderPrice = quantity * price;
          Log.d( "orderPrice", ""+ order.orderPrice);
 
+         Intent orderIntent = new Intent(MainActivity.this, OrderActivity.class);
+         orderIntent.putExtra("userNameForIntent", order.userName);
+         orderIntent.putExtra("goodsName", order.goodsName);
+         orderIntent.putExtra("quantity", order.quantity);
+         orderIntent.putExtra("orderPrice", order.orderPrice);
+         orderIntent.putExtra("price", order.price);
+         startActivity(orderIntent);
      }
 }
